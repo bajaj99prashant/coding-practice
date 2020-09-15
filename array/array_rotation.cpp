@@ -15,8 +15,9 @@ void arrayRotationMyApproach (int arr[], int d, int n){
 }
 
 void jugglingAlgorithm (int arr[], int d, int n){
+    d %= n;
     // what this algortihm does is it shifts the array by gcd(n, d) times in every inner loop and runs outer loop by d times
-    // t.c is O(n/gcd(n, d)*d) 
+    // t.c is O(n) 
 
     // calculating gcd
     int num = n, div = d, rem = num%div;
@@ -26,19 +27,21 @@ void jugglingAlgorithm (int arr[], int d, int n){
         rem = num%div;
     }
     int gcd = div;
-    int shifEle = n/gcd;
 
     // shifting elements
-    for (int i = 0; i < d; i++){
+    for (int i = 0; i < gcd; i++){
         int temp = arr[i];
         int k = i;
-        for (int j = 0; j < shifEle; j++){
-            if (j == shifEle-1)
-                arr[k] = temp;
-            else
-                arr[k] = arr[k+d];
-            k += d;
+        while(1){
+            int j = k + d;
+            if (j >= n)
+                j -= n;
+            if (j == i)
+                break;
+            arr[k] = arr[j];
+            k = j;
         }
+        arr[k] = temp;
     }
 
     // printing elements modifed
