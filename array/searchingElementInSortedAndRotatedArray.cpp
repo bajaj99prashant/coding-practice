@@ -33,7 +33,8 @@ int findingHighestElement (int arr[], int i, int j){
     }
 }
 
-int findElement(int arr[], int key, int i, int j, int maxIndex){
+int findElement(int arr[], int key, int i, int j){
+    int maxIndex = findingHighestElement(arr, i, j);
     int val;
     if (key < arr[i] && key <= arr[j] && maxIndex < j){
         val = BST(arr, maxIndex+1, j, key);
@@ -47,13 +48,34 @@ int findElement(int arr[], int key, int i, int j, int maxIndex){
     
 }
 
+int improvedSearchingAlgoithm (int arr[], int i, int j, int element){
+    if (i > j)
+        return -1;
+
+    int mid = (i+j)/2;
+    if (arr[mid] == element){
+        return mid;
+    }
+    
+    if (arr[i] <= arr[mid]){
+        if (element >= arr[i] && element <= arr[mid])
+            return improvedSearchingAlgoithm(arr, i, mid-1, element);
+        
+        return improvedSearchingAlgoithm(arr, mid+1, j, element);
+    }
+    
+    if (element >= arr[mid] && element <= arr[j])
+        return improvedSearchingAlgoithm(arr, mid+1, j, element);
+
+    return improvedSearchingAlgoithm(arr, i, mid-1, element);
+}
+
 int main () {
     int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3};
     int n = *(&arr+1) - arr;
-    int maxIndex = findingHighestElement (arr, 0, n-1);
-    int element = 7;
-    int eleIndex =  findElement(arr, element, 0, n-1, maxIndex);
-    if (eleIndex > n-1)
+    int key = 10;
+    int eleIndex = improvedSearchingAlgoithm(arr, 0, n-1, key);
+    if (eleIndex == -1)
         cout << "Not found";
     else 
         cout << eleIndex;
