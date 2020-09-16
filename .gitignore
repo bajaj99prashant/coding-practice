@@ -7,4 +7,4 @@
 #and directories
 !*/
 !.gitignore
-!README.md
+!*.md

@@ -58,15 +58,20 @@ int improvedSearchingAlgoithm (int arr[], int i, int j, int element){
     }
     
     if (arr[i] <= arr[mid]){
+        // it is efficient to check when array is sorted and when it is not sorted
+        // when array is sorted in upper half
         if (element >= arr[i] && element <= arr[mid])
+        // when element belong to sorted upper half
             return improvedSearchingAlgoithm(arr, i, mid-1, element);
-        
+        // when element is not in sorted upper half
         return improvedSearchingAlgoithm(arr, mid+1, j, element);
     }
     
+    // when array is not sorted in upper half but sorted in lower halfha and element belong to lower half
     if (element >= arr[mid] && element <= arr[j])
         return improvedSearchingAlgoithm(arr, mid+1, j, element);
 
+    // when array is sorted in lower half but element doesn't belong to lower half
     return improvedSearchingAlgoithm(arr, i, mid-1, element);
 }
 
