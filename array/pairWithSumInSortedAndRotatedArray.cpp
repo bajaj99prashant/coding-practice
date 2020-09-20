@@ -34,6 +34,7 @@ int* trivialApproach(int x, int arr[], int n){
 // but this approach only uses the fact that array is sorted and not rotated.
 
 int findingIndexSmallest(int arr[], int n){
+    // this step can be optimized to O(log n)
     int min = arr[0];
     int j = 0;
     for (int i = 0; i<n; i++){
@@ -82,6 +83,7 @@ int* improvedSolution (int x, int arr[], int n){
     ar[1] = 0;
 
     return ar;
+    // we can use modular airthmetic to increament and decreament the i's and j's for the solution and it can result in O(1) space complexity.
 }
 
 int main () {
@@ -94,6 +96,8 @@ int main () {
         cout << "pair is (" << ans[0] << ", " << ans[1] << ")";
     return 0;
 }
+
+/* to find all the pair with the same some in the given just make the array of pairs and just the pairs while checking the condition. */
 
 /*
     Given an array that is sorted and then rotated around an unknown point.
